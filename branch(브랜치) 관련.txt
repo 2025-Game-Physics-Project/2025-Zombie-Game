@@ -1,0 +1,5 @@
+
+1. 먼저 프로젝트 clone해서 가져오기.
+2. git fetch 돌리기.
+3. git branch -a로 확인
+4. 이후 git switch "feat/#5-enemy"로 바꾸고 싶은 곳으로 바꾸기.
