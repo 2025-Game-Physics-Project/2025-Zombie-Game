@@ -386,7 +386,7 @@ MonoBehaviour:
   accuracy: 100
   fireRate: 0.1
   reloadTime: 0.7
-  damage: 44
+  damage: 10
   reloadBulletCount: 30
   currentBulletCount: 30
   maxBulletCount: 999
