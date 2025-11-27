@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2319037646212550958}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -5, y: 1, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -38,7 +38,7 @@ Transform:
   - {fileID: 8718285905449213369}
   - {fileID: 105304309578826074}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &2483873215406735431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ MonoBehaviour:
   maxBulletCount: 999
   carryBulletCount: 56
   retroActionForce: 0
-  muzzleFlash: {fileID: 0}
+  muzzleFlash: {fileID: 4415045961975892458, guid: 44bf45a788026cb4795dfca7dbdd11d2, type: 3}
   fire_Sound: {fileID: 8300000, guid: 9e423f8684e916247aaf7e8f9350d36c, type: 3}
 --- !u!114 &7632830082691283650
 MonoBehaviour:
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGun: {fileID: 2483873215406735431}
-  bulletTrailPrefab: {fileID: 0}
+  bulletTrailPrefab: {fileID: 5304270280705439218, guid: dba4072b0f07eb442aa3ac580513f435, type: 3}
   originPos: {x: 0, y: 0, z: 0}
   bulletSpawnPos: {fileID: 105304309578826074}
   impactEffectPrefab: {fileID: 1000010355441670, guid: ff72eb93d37e2614d8b498426efcb184, type: 3}

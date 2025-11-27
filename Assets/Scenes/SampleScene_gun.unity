@@ -1114,11 +1114,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2039319368}
   m_CullTransparentMesh: 1
---- !u!198 &198000012216622987 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 9090132297156461641, guid: f37d157ccf5490b41bcf3fe076ebcada, type: 3}
-  m_PrefabInstance: {fileID: 1190237066353544813}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1190237066353544813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1179,6 +1174,10 @@ PrefabInstance:
       propertyPath: text_BulletCount
       value: 
       objectReference: {fileID: 2039319370}
+    - target: {fileID: 5316765136591553100, guid: f37d157ccf5490b41bcf3fe076ebcada, type: 3}
+      propertyPath: bulletTrailPrefab
+      value: 
+      objectReference: {fileID: 1881263644}
     - target: {fileID: 7693219076165169077, guid: f37d157ccf5490b41bcf3fe076ebcada, type: 3}
       propertyPath: damage
       value: 10
@@ -1207,7 +1206,7 @@ PrefabInstance:
     - target: {fileID: 2483873215406735431, guid: 4c06b4bc634e22149a0edaa53c978b7c, type: 3}
       propertyPath: muzzleFlash
       value: 
-      objectReference: {fileID: 198000012216622987}
+      objectReference: {fileID: 3968716513347146097}
     - target: {fileID: 7632830082691283650, guid: 4c06b4bc634e22149a0edaa53c978b7c, type: 3}
       propertyPath: text_BulletCount
       value: 
@@ -1261,6 +1260,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c06b4bc634e22149a0edaa53c978b7c, type: 3}
+--- !u!198 &3968716513347146097 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7352214186156269444, guid: 4c06b4bc634e22149a0edaa53c978b7c, type: 3}
+  m_PrefabInstance: {fileID: 3968716513347146096}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
