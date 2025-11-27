@@ -30,6 +30,11 @@ public class GunController : MonoBehaviour
     private Coroutine retroCoroutine;
     private Coroutine reloadCoroutine;
 
+    void Awake()
+    {
+        text_BulletCount = GameObject.Find("Bulletcount")?.GetComponent<TextMeshProUGUI>();
+    }
+
     void Start()
     {
         // ✨ 메인 카메라 할당 (Start에서 한 번만 호출)

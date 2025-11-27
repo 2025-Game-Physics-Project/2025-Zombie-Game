@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2483873215406735431}
   - component: {fileID: 7632830082691283650}
   - component: {fileID: 7804574015535132737}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ MonoBehaviour:
   accuracy: 100
   fireRate: 0.2
   reloadTime: 0.7
-  damage: 44
+  damage: 4
   reloadBulletCount: 12
   currentBulletCount: 12
   maxBulletCount: 999
@@ -94,7 +94,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 9e423f8684e916247aaf7e8f9350d36c, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 450684200890764254}
   - component: {fileID: 7019458255228902888}
   - component: {fileID: 2730158126960193600}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapon_01_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -300,7 +300,7 @@ GameObject:
   - component: {fileID: 7602874586814517762}
   - component: {fileID: 3161783869737600497}
   - component: {fileID: 254972006133086529}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapon_01_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -409,7 +409,7 @@ GameObject:
   - component: {fileID: 6734518256295451900}
   - component: {fileID: 6566491197059835835}
   - component: {fileID: 502284434615250263}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapon_01_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -515,7 +515,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 105304309578826074}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BulletSpawnPlace_Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -551,7 +551,7 @@ GameObject:
   - component: {fileID: 6934958213427269203}
   - component: {fileID: 1813407837277586482}
   - component: {fileID: 8807794728877980577}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapon_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -660,6 +660,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tracer_object
       objectReference: {fileID: 0}
+    - target: {fileID: 5134850675317073355, guid: dba4072b0f07eb442aa3ac580513f435, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7727909025940478149, guid: dba4072b0f07eb442aa3ac580513f435, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.025
@@ -721,6 +725,10 @@ PrefabInstance:
     - target: {fileID: 2199719474428884007, guid: 44bf45a788026cb4795dfca7dbdd11d2, type: 3}
       propertyPath: m_Name
       value: MuzzleFlashEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 2199719474428884007, guid: 44bf45a788026cb4795dfca7dbdd11d2, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9037702973955991561, guid: 44bf45a788026cb4795dfca7dbdd11d2, type: 3}
       propertyPath: m_LocalPosition.x

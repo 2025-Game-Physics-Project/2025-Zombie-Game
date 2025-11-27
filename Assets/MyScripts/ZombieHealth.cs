@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ZombieHealth : MonoBehaviour
+public class ZombieHealth : MonoBehaviour, IDamageable //사격구현 1단계 (ctrl f 추적용)
 {
     public int maxHealth = 3;
     public int currentHealth;
@@ -23,11 +23,11 @@ public class ZombieHealth : MonoBehaviour
         zombieAI = GetComponent<ZombieAI>();
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(int damage) //수정 2. damage로 수정
     {
         if (isDead) return;
 
-        currentHealth -= amount;
+        currentHealth -= damage;
         currentHealth = Mathf.Max(0, currentHealth);
 
         Debug.Log($"Zombie HP: {currentHealth}");

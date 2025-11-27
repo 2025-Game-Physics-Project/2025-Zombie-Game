@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8582514369947575698}
   - component: {fileID: 4765210509216936143}
   - component: {fileID: 3412081838002983830}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapon_02_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 6357257743455533338}
   - component: {fileID: 6533648681451051032}
   - component: {fileID: 9050750231988884386}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapon_02_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 7982762158620766311}
   - component: {fileID: 676841410077777929}
   - component: {fileID: 373796136945001233}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapon_02_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 7693219076165169077}
   - component: {fileID: 5316765136591553100}
   - component: {fileID: 2044658984633608829}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: riple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,7 +386,7 @@ MonoBehaviour:
   accuracy: 100
   fireRate: 0.1
   reloadTime: 0.7
-  damage: 10
+  damage: 2
   reloadBulletCount: 30
   currentBulletCount: 30
   maxBulletCount: 999
@@ -424,7 +424,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 0b5211610be1612479e6db0f967b9a5e, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -521,7 +521,7 @@ GameObject:
   - component: {fileID: 2537264562525788945}
   - component: {fileID: 1497734133315805713}
   - component: {fileID: 6522686639601919330}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapon_02_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -630,7 +630,7 @@ GameObject:
   - component: {fileID: 2311516195247350672}
   - component: {fileID: 3687272855743963344}
   - component: {fileID: 6136150117411839570}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapon_02_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -739,7 +739,7 @@ GameObject:
   - component: {fileID: 8228477072875381841}
   - component: {fileID: 4103305761883556746}
   - component: {fileID: 6685673359287006171}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapon_02_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -845,7 +845,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6970281604889137392}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BulletSpawnPlace_Riple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -881,7 +881,7 @@ GameObject:
   - component: {fileID: 1885742160744585432}
   - component: {fileID: 4665409913305395276}
   - component: {fileID: 4669906814985926936}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapon_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -990,6 +990,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tracer_object
       objectReference: {fileID: 0}
+    - target: {fileID: 5134850675317073355, guid: dba4072b0f07eb442aa3ac580513f435, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7727909025940478149, guid: dba4072b0f07eb442aa3ac580513f435, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.025
@@ -1056,6 +1060,10 @@ PrefabInstance:
     - target: {fileID: 2199719474428884007, guid: 44bf45a788026cb4795dfca7dbdd11d2, type: 3}
       propertyPath: m_Name
       value: MuzzleFlashEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 2199719474428884007, guid: 44bf45a788026cb4795dfca7dbdd11d2, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9037702973955991561, guid: 44bf45a788026cb4795dfca7dbdd11d2, type: 3}
       propertyPath: m_LocalPosition.x
