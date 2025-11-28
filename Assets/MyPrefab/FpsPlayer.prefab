@@ -133,7 +133,6 @@ GameObject:
   - component: {fileID: 3308289862552302862}
   - component: {fileID: 2153087943232910027}
   - component: {fileID: 5502825055097452155}
-  - component: {fileID: 7581174973911010623}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: Untagged
@@ -260,22 +259,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!114 &7581174973911010623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2285623973739352022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b40f548e52d01ad4e8ce9f5fd24e2797, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 3308289862552302862}
-  range: 50
-  damage: 1
-  fireKey: 323
 --- !u!1 &3730281721679294602
 GameObject:
   m_ObjectHideFlags: 0
@@ -947,8 +930,8 @@ MonoBehaviour:
   weaponMount: {fileID: 2759344814033527560}
   armsAnimator: {fileID: 4674347013811682788}
   weaponPrefabs:
-  - {fileID: 1081849826363722343, guid: 92ad80c611a904eb69bc4954bb34a219, type: 3}
-  - {fileID: 3563204298406430845, guid: e8fbec468d3d6432fb8fd4e9e1aaf7f9, type: 3}
+  - {fileID: 2319037646212550958, guid: 4c06b4bc634e22149a0edaa53c978b7c, type: 3}
+  - {fileID: 3387302943921306949, guid: f37d157ccf5490b41bcf3fe076ebcada, type: 3}
 --- !u!1 &8717339072646991411
 GameObject:
   m_ObjectHideFlags: 0

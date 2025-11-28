@@ -186,6 +186,6 @@ public class FpsController : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.TextField(new Rect(0, 0, 100, 30), isGrounded.ToString());
+        //GUI.TextField(new Rect(0, 0, 100, 30), isGrounded.ToString()); //디버그용. 지금은 지움.
     }
 }
