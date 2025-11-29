@@ -194,9 +194,4 @@ public class FpsController : MonoBehaviour
             rightArm.transform.localRotation = target;
         }
     }
-
-    void OnGUI()
-    {
-        GUI.TextField(new Rect(0, 0, 100, 30), isGrounded.ToString());
-    }
 }

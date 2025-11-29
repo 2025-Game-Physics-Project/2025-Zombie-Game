@@ -194,7 +194,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 183
+    m_Bits: 439
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -430,6 +430,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5231359181202356192}
+  - component: {fileID: 3247474873255309183}
   m_Layer: 0
   m_Name: ViewRig
   m_TagString: Untagged
@@ -455,6 +456,23 @@ Transform:
   - {fileID: 2188583219166614409}
   m_Father: {fileID: 7572362242327941487}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3247474873255309183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5413778271587214505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ec1ed4718d3141c6941d4eed19d19a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 3308289862552302862}
+  tiltSpeed: 10
+  tiltAmount: 2
+  normalFOV: 60
+  runFOV: 70
 --- !u!1 &6105537990619223254
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,6 +644,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   isRun: 0
+  camBob: {fileID: 3247474873255309183}
 --- !u!114 &1543650627658249363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1029,8 +1048,9 @@ MonoBehaviour:
   weaponMount: {fileID: 2759344814033527560}
   armsAnimator: {fileID: 4674347013811682788}
   weaponPrefabs:
-  - {fileID: 1081849826363722343, guid: 92ad80c611a904eb69bc4954bb34a219, type: 3}
-  - {fileID: 3563204298406430845, guid: e8fbec468d3d6432fb8fd4e9e1aaf7f9, type: 3}
+  - {fileID: 2319037646212550958, guid: 4c06b4bc634e22149a0edaa53c978b7c, type: 3}
+  - {fileID: 3387302943921306949, guid: f37d157ccf5490b41bcf3fe076ebcada, type: 3}
+  canChangeGun: 1
 --- !u!1 &8717339072646991411
 GameObject:
   m_ObjectHideFlags: 0
