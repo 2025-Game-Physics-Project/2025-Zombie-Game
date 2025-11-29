@@ -1,27 +1,27 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class ZombieAI : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public Transform player; //ÇÃ·¹ÀÌ¾î. ¾À¿¡¼­ µå·¡±×.
+    public Transform player; //í”Œë ˆì´ì–´. ì”¬ì—ì„œ ë“œë˜ê·¸.
 
-    public float detectionRange = 10f; //ÀÌ °Å¸® ¾È¿¡ µé¾î°¡¸é Ãß°İ ½ÃÀÛ
-    public float attackRange = 2f; //ÀÌ °Å¸® ¾È¿¡ µé¾î°¡¸é °ø°İ
+    public float detectionRange = 10f; //ì´ ê±°ë¦¬ ì•ˆì— ë“¤ì–´ê°€ë©´ ì¶”ê²© ì‹œì‘
+    public float attackRange = 2f; //ì´ ê±°ë¦¬ ì•ˆì— ë“¤ì–´ê°€ë©´ ê³µê²©
 
-    public float moveSpeed = 2f;        // °È´Â ¼Óµµ
-    public float rotationSpeed = 5f;    // ÇÃ·¹ÀÌ¾î ¹æÇâÀ¸·Î µµ´Â ¼Óµµ
+    public float moveSpeed = 2f;        // ê±·ëŠ” ì†ë„
+    public float rotationSpeed = 5f;    // í”Œë ˆì´ì–´ ë°©í–¥ìœ¼ë¡œ ë„ëŠ” ì†ë„
 
     private Animator animator;
 
-    public int attackDamage = 1; //°ø°İ¿ë µ¥¹ÌÁö. ÇÃ·¹ÀÌ¾î Ã¼·ÂÀº 3. °ø°İ µ¥¹ÌÁö 1.
-    private PlayerHealth playerHealth; //ÇÃ·¹ÀÌ¾î Ã¼·Â º¯¼ö.
-    private ZombieHealth zombieHealth; //Á»ºñ Ã¼·Â º¯¼ö. hp 0ÀÏ½Ã ·ÎÁ÷ Áß´Ü À§ÇÔ.
+    public int attackDamage = 1; //ê³µê²©ìš© ë°ë¯¸ì§€. í”Œë ˆì´ì–´ ì²´ë ¥ì€ 3. ê³µê²© ë°ë¯¸ì§€ 1.
+    private PlayerHealth playerHealth; //í”Œë ˆì´ì–´ ì²´ë ¥ ë³€ìˆ˜.
+    private ZombieHealth zombieHealth; //ì¢€ë¹„ ì²´ë ¥ ë³€ìˆ˜. hp 0ì¼ì‹œ ë¡œì§ ì¤‘ë‹¨ ìœ„í•¨.
 
-    private void Awake() //¹°Ã¼ »ı¼ºµÇ´Â Awake¶§ ¾Ö´Ï¸ŞÀÌÅÍ ÇÒ´ç
+    private void Awake() //ë¬¼ì²´ ìƒì„±ë˜ëŠ” Awakeë•Œ ì• ë‹ˆë©”ì´í„° í• ë‹¹
     {
         animator = GetComponent<Animator>();
-        playerHealth = player.GetComponent<PlayerHealth>(); //ÇÃ·¹ÀÌ¾î Ã¼·Â °¡Á®¿À±â. ´Ù¸¥ ¾À¿¡¼­µµ È°¿ëÇÒ °æ¿ì null Ã¼Å© Ãß°¡.
-        zombieHealth = GetComponent<ZombieHealth>(); //Á»ºñ Ã¼·Â °¡Á®¿À±â. hp 0ÀÏ½Ã ·ÎÁ÷ Áß´Ü À§ÇÔ.
+        playerHealth = player.GetComponent<PlayerHealth>(); //í”Œë ˆì´ì–´ ì²´ë ¥ ê°€ì ¸ì˜¤ê¸°. ë‹¤ë¥¸ ì”¬ì—ì„œë„ í™œìš©í•  ê²½ìš° null ì²´í¬ ì¶”ê°€.
+        zombieHealth = GetComponent<ZombieHealth>(); //ì¢€ë¹„ ì²´ë ¥ ê°€ì ¸ì˜¤ê¸°. hp 0ì¼ì‹œ ë¡œì§ ì¤‘ë‹¨ ìœ„í•¨.
     }
 
     void Start()
@@ -32,18 +32,18 @@ public class ZombieAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player == null) return; // È¤½Ã ÇÃ·¹ÀÌ¾î ¾È ³Ö¾úÀ¸¸é ±×³É ÆĞ½º
-        if (zombieHealth != null && zombieHealth.IsDead) return; //Á»ºñ°¡ Á×¾ú´Ù¸é ÆĞ½º. hp 0ÀÏ½Ã ·ÎÁ÷ Áß´Ü À§ÇÔ.
+        if (player == null) return; // í˜¹ì‹œ í”Œë ˆì´ì–´ ì•ˆ ë„£ì—ˆìœ¼ë©´ ê·¸ëƒ¥ íŒ¨ìŠ¤
+        if (zombieHealth != null && zombieHealth.IsDead) return; //ì¢€ë¹„ê°€ ì£½ì—ˆë‹¤ë©´ íŒ¨ìŠ¤. hp 0ì¼ì‹œ ë¡œì§ ì¤‘ë‹¨ ìœ„í•¨.
 
-        // 1. °Å¸® °è»ê
+        // 1. ê±°ë¦¬ ê³„ì‚°
         float distance = Vector3.Distance(transform.position, player.position);
 
-        // 1) Áö±İ °ø°İ ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ Àç»ı ÁßÀÎÁö ¸ÕÀú Ã¼Å©
+        // 1) ì§€ê¸ˆ ê³µê²© ì• ë‹ˆë©”ì´ì…˜ì´ ì¬ìƒ ì¤‘ì¸ì§€ ë¨¼ì € ì²´í¬
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         bool isCurrentlyAttacking =
             stateInfo.IsName("zombie_attack") && stateInfo.normalizedTime < 1.0f;
 
-        // 2) °ø°İ ÁßÀÌ¶ó¸é, ÀÌµ¿/»óÅÂ ÀüÈ¯À» Àá½Ã ¸·´Â´Ù
+        // 2) ê³µê²© ì¤‘ì´ë¼ë©´, ì´ë™/ìƒíƒœ ì „í™˜ì„ ì ì‹œ ë§‰ëŠ”ë‹¤
         if (isCurrentlyAttacking)
         {
             return;
@@ -51,17 +51,17 @@ public class ZombieAI : MonoBehaviour
 
         if (distance <= attackRange)
         {
-            // 3´Ü°è: °ø°İ ¹üÀ§ ¾È
+            // 3ë‹¨ê³„: ê³µê²© ë²”ìœ„ ì•ˆ
             SetAttack();
         }
         else if (distance <= detectionRange)
         {
-            // 2´Ü°è: ÀÎ½Ä ¹üÀ§ ¾È (Ãß°İ)
+            // 2ë‹¨ê³„: ì¸ì‹ ë²”ìœ„ ì•ˆ (ì¶”ê²©)
             SetChase();
         }
         else
         {
-            // 1´Ü°è: ÇÃ·¹ÀÌ¾î ¸ø º½ (Idle)
+            // 1ë‹¨ê³„: í”Œë ˆì´ì–´ ëª» ë´„ (Idle)
             SetIdle();
         }
     }
@@ -69,19 +69,19 @@ public class ZombieAI : MonoBehaviour
     private void SetIdle()
     {
         animator.SetBool("IsWalking", false);
-        // ÀÌµ¿ X
+        // ì´ë™ X
     }
 
     private void SetChase()
     {
         animator.SetBool("IsWalking", true);
 
-        // ÇÃ·¹ÀÌ¾î ¹æÇâ °è»ê
+        // í”Œë ˆì´ì–´ ë°©í–¥ ê³„ì‚°
         Vector3 dir = player.position - transform.position;
-        dir.y = 0f;               // À§/¾Æ·¡´Â ¹«½Ã (¹Ù´Ú¿¡¼­¸¸ ¿òÁ÷ÀÌ°Ô)
+        dir.y = 0f;               // ìœ„/ì•„ë˜ëŠ” ë¬´ì‹œ (ë°”ë‹¥ì—ì„œë§Œ ì›€ì§ì´ê²Œ)
         dir.Normalize();
 
-        // ÇÃ·¹ÀÌ¾î ÂÊÀ¸·Î ÃµÃµÈ÷ È¸Àü
+        // í”Œë ˆì´ì–´ ìª½ìœ¼ë¡œ ì²œì²œíˆ íšŒì „
         Quaternion targetRot = Quaternion.LookRotation(dir);
         transform.rotation = Quaternion.Slerp(
             transform.rotation,
@@ -89,25 +89,25 @@ public class ZombieAI : MonoBehaviour
             rotationSpeed * Time.deltaTime
         );
 
-        // ÇÃ·¹ÀÌ¾î ¹æÇâÀ¸·Î ÀÌµ¿
+        // í”Œë ˆì´ì–´ ë°©í–¥ìœ¼ë¡œ ì´ë™
         transform.position += dir * moveSpeed * Time.deltaTime;
     }
 
-    public float attackCooldown = 1.5f; //°ø°İ ÄğÅ¸ÀÓ.
-    private float lastAttackTime = -999f; //¸¶Áö¸· °ø°İ ½Ã°£
+    public float attackCooldown = 1.5f; //ê³µê²© ì¿¨íƒ€ì„.
+    private float lastAttackTime = -999f; //ë§ˆì§€ë§‰ ê³µê²© ì‹œê°„
 
     private void SetAttack()
     {
         animator.SetBool("IsWalking", false);
 
-        // 1) ÇöÀç °ø°İ ¾Ö´Ï°¡ Àç»ı ÁßÀÎÁö È®ÀÎ
+        // 1) í˜„ì¬ ê³µê²© ì• ë‹ˆê°€ ì¬ìƒ ì¤‘ì¸ì§€ í™•ì¸
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         bool isCurrentlyAttacking =
             stateInfo.IsName("zombie_attack") && stateInfo.normalizedTime < 1.0f;
 
         if (isCurrentlyAttacking)
         {
-            // ÀÌ¹Ì °ø°İ ÁßÀÌ¸é ´Ù½Ã Æ®¸®°Å¸¦ ½îÁö ¾ÊÀ½
+            // ì´ë¯¸ ê³µê²© ì¤‘ì´ë©´ ë‹¤ì‹œ íŠ¸ë¦¬ê±°ë¥¼ ì˜ì§€ ì•ŠìŒ
             return;
         }
 
@@ -118,16 +118,16 @@ public class ZombieAI : MonoBehaviour
         }
     }
 
-    // ¾Ö´Ï¸ŞÀÌ¼Ç ÀÌº¥Æ®¿¡¼­ È£ÃâÇÒ °ø°İ¿ë ÇÔ¼ö.
+    // ì• ë‹ˆë©”ì´ì…˜ ì´ë²¤íŠ¸ì—ì„œ í˜¸ì¶œí•  ê³µê²©ìš© í•¨ìˆ˜.
     public void OnAttackHit()
     {
         if (playerHealth == null) return;
 
-        // ¾ÆÁ÷ °ø°İ °Å¸® ¾È¿¡ ÀÖ´ÂÁö È®ÀÎ (ÇÃ·¹ÀÌ¾î°¡ µÚ·Î ºüÁ®¼­ È¸ÇÇ °¡´ÉÇÏ¹Ç·Î)
+        // ì•„ì§ ê³µê²© ê±°ë¦¬ ì•ˆì— ìˆëŠ”ì§€ í™•ì¸ (í”Œë ˆì´ì–´ê°€ ë’¤ë¡œ ë¹ ì ¸ì„œ íšŒí”¼ ê°€ëŠ¥í•˜ë¯€ë¡œ)
         float distance = Vector3.Distance(transform.position, player.position);
         if (distance > attackRange)
         {
-            // ³Ê¹« ¸Ö¾îÁ³À¸¸é ¹Ì½º Ã³¸® ·Î±×. µğ¹ö±×¿ë
+            // ë„ˆë¬´ ë©€ì–´ì¡Œìœ¼ë©´ ë¯¸ìŠ¤ ì²˜ë¦¬ ë¡œê·¸. ë””ë²„ê·¸ìš©
             Debug.Log("Attack missed (player too far).");
             return;
         }
