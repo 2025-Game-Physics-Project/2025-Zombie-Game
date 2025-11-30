@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
@@ -6,28 +7,48 @@ public class WeaponManager : MonoBehaviour
     public Animator armsAnimator;
     public GameObject[] weaponPrefabs;  // 여러 무기 프리팹들
     private GameObject currentWeapon;   // 현재 장착 중 무기
+    private float pistolReloadTime;
+    private float ripleReloadTime;
     private int currentIndex = -1;
+    private UIWeaponIconManager gunManager;
+    public bool canChangeGun = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
+        gunManager = GameObject.Find("GunManager").GetComponent<UIWeaponIconManager>();
         UnequipWeapon(); // 시작 시 아무 무기도 장착하지 않음
+
+        pistolReloadTime = weaponPrefabs[0].GetComponent<Gun>().reloadTime;
+        ripleReloadTime = weaponPrefabs[1].GetComponent<Gun>().reloadTime;
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        if (armsAnimator.GetBool("isRun") || !canChangeGun) return; // 뛰고 있을 때는 총 전환을 할 수 없도록 함.
+
         if (Input.GetKeyDown(KeyCode.Alpha1)) // 권총
         {
             armsAnimator.SetBool("isHoldPistol", true);
             armsAnimator.SetBool("isIdle", false);
-            EquipWeapon(0);
+            int gun_index = 0;
+            if (currentIndex != gun_index)
+                armsAnimator.Play("Idle", 0, 0f);
+            EquipWeapon(gun_index);
+            gunManager.ShowPistol();
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            //armsAnimator.SetBool("isHoldPistol", true);
-            //armsAnimator.SetBool("isIdle", false);
-            EquipWeapon(1);
+            armsAnimator.SetBool("isHoldPistol", true);
+            armsAnimator.SetBool("isIdle", false);
+            armsAnimator.Play("Idle", 0, 0f);
+            int gun_index = 1;
+            if (currentIndex != gun_index)
+                armsAnimator.Play("Idle", 0, 0f);
+            EquipWeapon(gun_index);
+            gunManager.ShowRifle();
         }
 
         if (Input.GetKeyDown(KeyCode.X))
@@ -35,6 +56,7 @@ public class WeaponManager : MonoBehaviour
             armsAnimator.SetBool("isIdle", true);
             armsAnimator.SetBool("isHoldPistol", false);
             UnequipWeapon();
+            gunManager.DeactivateAll();
         }
     }
 
@@ -55,7 +77,7 @@ public class WeaponManager : MonoBehaviour
         currentWeapon = newWeapon;
         currentIndex = index;
     }
-    
+
     public void UnequipWeapon()
     {
         if (currentWeapon != null)

@@ -1,26 +1,27 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    /* ¸ğµç Á¾·ùÀÇ ÃÑµéÀÌ °øÅëÀûÀ¸·Î °®°í ÀÖ´Â ¼Ó¼ºµé(¸â¹ö º¯¼öµé) */
+    /* ëª¨ë“  ì¢…ë¥˜ì˜ ì´ë“¤ì´ ê³µí†µì ìœ¼ë¡œ ê°–ê³  ìˆëŠ” ì†ì„±ë“¤(ë©¤ë²„ ë³€ìˆ˜ë“¤) */
 
-    public string gunName;  // ÃÑÀÇ ÀÌ¸§.
-    public float range;     // ÃÑÀÇ »çÁ¤ °Å¸®.
-    public float accuracy;  // ÃÑÀÇ Á¤È®µµ.
-    public float fireRate;  // ¿¬»ç ¼Óµµ.
-    public float reloadTime;// ÀçÀåÀü ¼Óµµ.
+    public string gunName;  // ì´ì˜ ì´ë¦„.
+    public float range;     // ì´ì˜ ì‚¬ì • ê±°ë¦¬.
+    public float accuracy;  // ì´ì˜ ì •í™•ë„.
+    public float fireRate;  // ì—°ì‚¬ ì†ë„.
+    public float reloadTime;// ì¬ì¥ì „ ì†ë„.
 
-    public int damage;      // ÃÑÀÇ °ø°İ·Â.
+    public int damage;      // ì´ì˜ ê³µê²©ë ¥.
 
-    public int reloadBulletCount;   // ÃÑÀÇ ÀçÀåÀü °³¼ö.
-    public int currentBulletCount;  // ÇöÀç ÅºÃ¢¿¡ ³²¾ÆÀÖ´Â ÃÑ¾ËÀÇ °³¼ö.
-    public int maxBulletCount;      // ÃÑ¾ËÀ» ÃÖ´ë ¸î °³±îÁö ¼ÒÀ¯ÇÒ ¼ö ÀÖ´ÂÁö. 
-    public int carryBulletCount;    // ÇöÀç ¼ÒÀ¯ÇÏ°í ÀÖ´Â ÃÑ¾ËÀÇ ÃÑ °³¼ö.
+    public int reloadBulletCount;   // ì´ì˜ ì¬ì¥ì „ ê°œìˆ˜.
+    public int currentBulletCount;  // í˜„ì¬ íƒ„ì°½ì— ë‚¨ì•„ìˆëŠ” ì´ì•Œì˜ ê°œìˆ˜.
+    public int maxBulletCount;      // ì´ì•Œì„ ìµœëŒ€ ëª‡ ê°œê¹Œì§€ ì†Œìœ í•  ìˆ˜ ìˆëŠ”ì§€. 
+    public int carryBulletCount;    // í˜„ì¬ ì†Œìœ í•˜ê³  ìˆëŠ” ì´ì•Œì˜ ì´ ê°œìˆ˜.
 
-    public float retroActionForce;  // ¹İµ¿ ¼¼±â. (position Á¶Á¤À¸·Î »ç¿ë)
+    public float retroActionForce;  // ë°˜ë™ ì„¸ê¸°. (position ì¡°ì •ìœ¼ë¡œ ì‚¬ìš©)
 
-    public ParticleSystem muzzleFlash;  // È­¿°±¸ ÀÌÆåÆ® Àç»ıÀ» ´ã´çÇÒ ÆÄÆ¼Å¬ ½Ã½ºÅÛ ÄÄÆ÷³ÍÆ®
-    public AudioClip fire_Sound;    // ÃÑ ¹ß»ç ¼Ò¸® ¿Àµğ¿À Å¬¸³
+    public ParticleSystem muzzleFlash;  // í™”ì—¼êµ¬ ì´í™íŠ¸ ì¬ìƒì„ ë‹´ë‹¹í•  íŒŒí‹°í´ ì‹œìŠ¤í…œ ì»´í¬ë„ŒíŠ¸
+    public AudioClip fire_Sound;    // ì´ ë°œì‚¬ ì†Œë¦¬ ì˜¤ë””ì˜¤ í´ë¦½
+    public AudioClip reload_Sound;    // ì´ ì¬ì¥ì „ ì†Œë¦¬ ì˜¤ë””ì˜¤ í´ë¦½
 }

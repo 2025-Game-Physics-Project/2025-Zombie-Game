@@ -5,6 +5,7 @@ using TMPro;
 public class GunController : MonoBehaviour
 {
     [SerializeField] private Gun currentGun;
+    private AudioSource playerAudioSource;
 
     // 🚀 Trail Renderer 프리팹
     [Header("Bullet")]
@@ -26,13 +27,22 @@ public class GunController : MonoBehaviour
 
     // ✨ 추가: 카메라 참조 (조준점 발사에 필수)
     private Camera mainCam;
+    private WeaponManager weaponManager;
 
     private Coroutine retroCoroutine;
     private Coroutine reloadCoroutine;
 
+    private Animator armsAnimator;
+    private FpsController fpsController;
+
     void Awake()
     {
         text_BulletCount = GameObject.Find("Bulletcount")?.GetComponent<TextMeshProUGUI>();
+        armsAnimator = GameObject.Find("Arms")?.GetComponent<Animator>();
+        fpsController = GameObject.Find("PlayerMesh")?.GetComponent<FpsController>();
+        playerAudioSource = GameObject.Find("FpsPlayer")?.GetComponent<AudioSource>();
+        weaponManager = GameObject.Find("ArmsCamera")?.GetComponent<WeaponManager>();
+        audioSource = playerAudioSource;
     }
 
     void Start()
@@ -44,7 +54,7 @@ public class GunController : MonoBehaviour
             Debug.LogError("씬에 태그가 MainCamera인 카메라가 없습니다!");
         }
 
-        audioSource = GetComponent<AudioSource>();
+        audioSource = playerAudioSource;
         UpdateBulletUI();
     }
 
@@ -63,7 +73,13 @@ public class GunController : MonoBehaviour
 
     private void TryFire()
     {
-        if (Input.GetButton("Fire1") && currentFireRate <= 0 && !isReload)
+        if (currentGun.gunName == "pistol") // 피스톨일 때는 버튼을 꾹누르는 걸로 총알이 발사 안되고 눌렀을때만 작동되게 하기 위해 이렇게 코딩함.
+        {
+            if (Input.GetButtonDown("Fire1") && currentFireRate <= 0 && !isReload && !fpsController.isRun)
+                Fire();
+            return;
+        }
+        if (Input.GetButton("Fire1") && currentFireRate <= 0 && !isReload && !fpsController.isRun)
             Fire();
     }
 
@@ -82,6 +98,8 @@ public class GunController : MonoBehaviour
 
         PlaySE(currentGun.fire_Sound);
         currentGun.muzzleFlash.Play();
+
+        armsAnimator.CrossFadeInFixedTime(Animator.StringToHash("PistolShoot"), 0.05f, 0, 0f);
 
         if (retroCoroutine != null)
             StopCoroutine(retroCoroutine);
@@ -117,8 +135,7 @@ public class GunController : MonoBehaviour
 
             // =========================================================
             // ✨ 통합된 충돌 효과 및 구멍 생성 로직 (impactEffectPrefab 사용)
-            if (impactEffectPrefab != null &&
-                hit.collider.gameObject.layer != LayerMask.NameToLayer("Player"))
+            if ((impactEffectPrefab != null) && (hit.collider.gameObject.layer != LayerMask.NameToLayer("Player") && hit.collider.gameObject.layer != LayerMask.NameToLayer("Monster")))
             {
                 // impactEffectPrefab을 충돌 지점에 생성하고 노말 방향을 바라보게 설정
                 GameObject impact = Instantiate(
@@ -184,7 +201,9 @@ public class GunController : MonoBehaviour
             currentGun.currentBulletCount < currentGun.reloadBulletCount)
         {
             if (reloadCoroutine == null)
+            {
                 reloadCoroutine = StartCoroutine(ReloadCoroutine());
+            }
         }
     }
 
@@ -193,10 +212,13 @@ public class GunController : MonoBehaviour
         if (currentGun.carryBulletCount > 0)
         {
             isReload = true;
+            armsAnimator.SetBool("isReload", isReload);
+            PlaySE(currentGun.reload_Sound);
 
             currentGun.carryBulletCount += currentGun.currentBulletCount;
             currentGun.currentBulletCount = 0;
             UpdateBulletUI();
+            weaponManager.canChangeGun = false;
 
             yield return new WaitForSeconds(currentGun.reloadTime);
 
@@ -213,6 +235,8 @@ public class GunController : MonoBehaviour
 
             UpdateBulletUI();
             isReload = false;
+            weaponManager.canChangeGun = true;
+            armsAnimator.SetBool("isReload", isReload);
         }
 
         reloadCoroutine = null;

@@ -34,10 +34,11 @@ public class FpsController : MonoBehaviour
     public LayerMask groundMask;
     private float groundCheckDistance = 0.15f;
 
-    private bool isRun = false;
+    public bool isRun = false;
     private bool isGrounded = false;
     private bool isJumpDelay = false;
     private bool canShoot = true;
+    public CameraRunBob camBob;
 
     Vector3 inputDir;
 
@@ -78,6 +79,11 @@ public class FpsController : MonoBehaviour
             isRun = !isRun;
         }
 
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            isRun = false;
+        }
+
         if (isRun)
         {
             runSpeed = realRunSpeed;
@@ -106,11 +112,16 @@ public class FpsController : MonoBehaviour
             canShoot = false;
         }
 
+        armsAnimator.SetBool("isRun", isRun);
+        camBob.SetRunning(isRun);
+
         // 총 쏘기
+        /*
         if (canShoot && Input.GetMouseButtonDown(0))
         {
-            armsAnimator.CrossFadeInFixedTime(Animator.StringToHash("PistolShoot"), 0.05f, 0, 0f);
+            // armsAnimator.CrossFadeInFixedTime(Animator.StringToHash("PistolShoot"), 0.05f, 0, 0f);
         }
+        */
 
 
         // 마우스 회전
@@ -182,10 +193,5 @@ public class FpsController : MonoBehaviour
             Quaternion target = pitchRot * rightArmBaseRot;
             rightArm.transform.localRotation = target;
         }
-    }
-
-    void OnGUI()
-    {
-        GUI.TextField(new Rect(0, 0, 100, 30), isGrounded.ToString());
     }
 }

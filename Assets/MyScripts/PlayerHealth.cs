@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
@@ -6,7 +6,7 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 3;
     public int currentHealth;
 
-    private void Awake() //ÃÖÃÊ »ı¼º½Ã Ã¼·Â ÃÖ´ë·Î.
+    private void Awake() //ìµœì´ˆ ìƒì„±ì‹œ ì²´ë ¥ ìµœëŒ€ë¡œ.
     {
         currentHealth = maxHealth;
     }
@@ -26,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        // ³ªÁß¿¡ ÄÆ½Å, UI µî ³ÖÀ» ¼ö ÀÖÀ½.Áö±İÀº °£´ÜÇÏ°Ô ¾À ¸®½ºÅ¸Æ®
+        // ë‚˜ì¤‘ì— ì»·ì‹ , UI ë“± ë„£ì„ ìˆ˜ ìˆìŒ.ì§€ê¸ˆì€ ê°„ë‹¨í•˜ê²Œ ì”¬ ë¦¬ìŠ¤íƒ€íŠ¸
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
