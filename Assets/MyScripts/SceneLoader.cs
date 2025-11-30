@@ -6,7 +6,7 @@ public class SceneLoader : MonoBehaviour
     public void StartGame()
     {
         // "GameScene"은 실제 게임 플레이 씬의 이름으로 변경해야 합니다.
-        SceneManager.LoadScene("Feature_GameMap3");
+        SceneManager.LoadScene("Feature_GameMap2");
     }
 
     public void QuitGame()
