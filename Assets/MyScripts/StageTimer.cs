@@ -1,41 +1,60 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class StageTimer : MonoBehaviour
 {
-    public float timeLimit = 180f;   // 3ºĞ=180, 5ºĞ=300 ÀÌ·± ½ÄÀ¸·Î Scene¸¶´Ù ´Ù¸£°Ô
+    public float timeLimit = 180f;   // 3ë¶„=180, 5ë¶„=300 ì´ëŸ° ì‹ìœ¼ë¡œ Sceneë§ˆë‹¤ ë‹¤ë¥´ê²Œ
 
     public float ElapsedTime { get; private set; }
     public bool IsTimeOver => ElapsedTime >= timeLimit;
 
     private bool isRunning = true;
 
-    private GUIStyle guiStyle; //GUI Ç¥½Ã¿ë.
+    private GUIStyle guiStyle; //GUI í‘œì‹œìš©.
 
     private void Awake()
     {
-        // ±ÛÀÚ ½ºÅ¸ÀÏ ÁØºñ
+        // ê¸€ì ìŠ¤íƒ€ì¼ ì¤€ë¹„
         guiStyle = new GUIStyle();
-        guiStyle.fontSize = 24;
+        guiStyle.fontSize = 36;
         guiStyle.normal.textColor = Color.white;
         guiStyle.fontStyle = FontStyle.Bold;
     }
 
-    private void OnGUI() //È­¸é Ç¥½Ã
+    private void OnGUI() //í™”ë©´ í‘œì‹œ
     {
         float remaining = timeLimit - ElapsedTime;
-        if (remaining < 0) {
-            remaining = 0;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
 
         int minutes = Mathf.FloorToInt(remaining / 60f);
         int seconds = Mathf.FloorToInt(remaining % 60f);
 
         string timeText = $"{minutes:00}:{seconds:00}";
+        Vector2 size = guiStyle.CalcSize(new GUIContent(timeText));
+        float x = (Screen.width - size.x) * 0.5f;
+        float y = 64;
 
-        // È­¸é ÁÂÃø »ó´Ü¿¡ Ç¥½Ã
-        GUI.Label(new Rect(60, 40, 150, 40), timeText, guiStyle);
+        if (remaining < 0) {
+            remaining = 0;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        if (remaining <= 61)
+        {
+            guiStyle.fontSize = 40;
+            guiStyle.normal.textColor = Color.red;
+        }
+        if (remaining <= 31)
+        {
+            guiStyle.fontSize = 44;
+            x += Random.Range(-5.0f, 5.0f);
+            y += Random.Range(-5.0f, 5.0f);
+        }
+
+        if (remaining <= 16)
+        {
+            guiStyle.fontSize = 52;
+        }
+
+        GUI.Label(new Rect(x, y, size.x, size.y), timeText, guiStyle);
     }
 
     private void Update()

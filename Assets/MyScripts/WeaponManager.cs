@@ -10,15 +10,12 @@ public class WeaponManager : MonoBehaviour
     private float pistolReloadTime;
     private float ripleReloadTime;
     private int currentIndex = -1;
-    private UIWeaponIconManager gunManager;
     public bool canChangeGun = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     void Start()
     {
-        gunManager = GameObject.Find("GunManager").GetComponent<UIWeaponIconManager>();
-        UnequipWeapon(); // 시작 시 아무 무기도 장착하지 않음
 
         pistolReloadTime = weaponPrefabs[0].GetComponent<Gun>().reloadTime;
         ripleReloadTime = weaponPrefabs[1].GetComponent<Gun>().reloadTime;
@@ -37,7 +34,6 @@ public class WeaponManager : MonoBehaviour
             if (currentIndex != gun_index)
                 armsAnimator.Play("Idle", 0, 0f);
             EquipWeapon(gun_index);
-            gunManager.ShowPistol();
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -48,7 +44,6 @@ public class WeaponManager : MonoBehaviour
             if (currentIndex != gun_index)
                 armsAnimator.Play("Idle", 0, 0f);
             EquipWeapon(gun_index);
-            gunManager.ShowRifle();
         }
 
         if (Input.GetKeyDown(KeyCode.X))
@@ -56,7 +51,6 @@ public class WeaponManager : MonoBehaviour
             armsAnimator.SetBool("isIdle", true);
             armsAnimator.SetBool("isHoldPistol", false);
             UnequipWeapon();
-            gunManager.DeactivateAll();
         }
     }
 

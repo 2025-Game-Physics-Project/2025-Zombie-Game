@@ -34,41 +34,41 @@ public class ZombieAI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+void Update()
+{
+    if (player == null) return;
+    if (zombieHealth != null && zombieHealth.IsDead) return;
+
+    float distance = Vector3.Distance(transform.position, player.position);
+
+    AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+    bool isCurrentlyAttacking =
+        stateInfo.IsName("zombie_attack") && stateInfo.normalizedTime < 1.0f;
+
+    if (isCurrentlyAttacking)
+        return;
+
+    // === 1) 시야 없으면 무조건 Idle ===
+    if (!HasLineOfSight())
     {
-        if (player == null) return; // 혹시 플레이어 안 넣었으면 그냥 패스
-        if (zombieHealth != null && zombieHealth.IsDead) return; //좀비가 죽었다면 패스. hp 0일시 로직 중단 위함.
-
-        // 1. 거리 계산
-        float distance = Vector3.Distance(transform.position, player.position);
-
-        // 1) 지금 공격 애니메이션이 재생 중인지 먼저 체크
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        bool isCurrentlyAttacking =
-            stateInfo.IsName("zombie_attack") && stateInfo.normalizedTime < 1.0f;
-
-        // 2) 공격 중이라면, 이동/상태 전환을 잠시 막는다
-        if (isCurrentlyAttacking)
-        {
-            return;
-        }
-
-        if (distance <= attackRange)
-        {
-            // 3단계: 공격 범위 안
-            SetAttack();
-        }
-        else if (distance <= detectionRange)
-        {
-            // 2단계: 인식 범위 안 (추격)
-            SetChase();
-        }
-        else
-        {
-            // 1단계: 플레이어 못 봄 (Idle)
-            SetIdle();
-        }
+        SetIdle();
+        return;
     }
+
+    // === 2) 시야가 있을 때만 판단 ===
+    if (distance <= attackRange)
+    {
+        SetAttack();
+    }
+    else if (distance <= detectionRange)
+    {
+        SetChase();
+    }
+    else
+    {
+        SetIdle();
+    }
+}
 
     private void SetIdle()
     {
@@ -78,6 +78,40 @@ public class ZombieAI : MonoBehaviour
 
     private void SetChase()
     {
+        animator.SetBool("IsWalking", true);
+
+        // 플레이어 방향 계산
+        Vector3 dir = player.position - transform.position;
+        dir.y = 0f;
+        dir.Normalize();
+
+        // 회전
+        Quaternion targetRot = Quaternion.LookRotation(dir);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
+
+        // ==== 여기부터 레이캐스트로 벽뚫 방지 ====
+        float step = moveSpeed * Time.deltaTime;
+        float rayDistance = step + 0.2f; // 살짝 여유
+
+        // 좀비 중심에서 약간 위쪽에서 레이 쏘기 (바닥 충돌 방지)
+        Vector3 rayOrigin = transform.position + Vector3.up * 0.5f;
+
+        if (Physics.Raycast(rayOrigin, dir, out RaycastHit hit, rayDistance))
+        {
+            // 벽, 장애물, 그 외 모든 콜라이더 막기
+            if (!hit.collider.CompareTag("Player"))
+            {
+                // 충돌물이 있음 → 이동 금지
+                Debug.DrawLine(rayOrigin, hit.point, Color.red);
+                return;
+            }
+        }
+
+        // 이동 가능 → 실제 이동
+        transform.position += dir * step;
+
+        Debug.DrawRay(rayOrigin, dir * rayDistance, Color.green);
+        /*
         animator.SetBool("IsWalking", true);
 
         // 플레이어 방향 계산
@@ -94,7 +128,7 @@ public class ZombieAI : MonoBehaviour
         );
 
         // 플레이어 방향으로 이동
-        transform.position += dir * moveSpeed * Time.deltaTime;
+        transform.position += dir * moveSpeed * Time.deltaTime;*/
     }
 
     public float attackCooldown = 1.5f; //공격 쿨타임.
@@ -122,9 +156,56 @@ public class ZombieAI : MonoBehaviour
         }
     }
 
+    // 시야(Line of Sight)가 없으면 추격 중단
+    bool HasLineOfSight()
+    {
+        Vector3 origin = transform.position + Vector3.up * 1.0f;
+        Vector3 dir = (player.position - transform.position).normalized;
+
+        float dist = Vector3.Distance(transform.position, player.position);
+
+        if (Physics.Raycast(origin, dir, out RaycastHit hit, dist))
+        {
+            // Player를 직접 보지 못하면 false
+            return hit.collider.CompareTag("Player");
+        }
+
+        return true;
+}
+
     // 애니메이션 이벤트에서 호출할 공격용 함수.
     public void OnAttackHit()
     {
+        if (playerHealth == null) return;
+
+        // 좀비의 가슴 높이에서 앞으로 레이 쏘기
+        Vector3 origin = transform.position + Vector3.up * 1.0f;
+        Vector3 dir = (player.position - transform.position).normalized;
+
+        float rayDistance = attackRange; // 공격 범위만큼
+
+        if (Physics.Raycast(origin, dir, out RaycastHit hit, rayDistance))
+        {
+            // Player에 맞았을 때만 데미지 처리
+            if (hit.collider.CompareTag("Player"))
+            {
+                playerHealth.TakeDamage(attackDamage);
+                Debug.Log("Zombie hit player! (Raycast)");
+                PlayBite();
+            }
+            else
+            {
+                Debug.Log("Attack blocked by " + hit.collider.name);
+            }
+        }
+        else
+        {
+            Debug.Log("Attack missed (no hit).");
+        }
+
+        // 디버그용 레이
+        Debug.DrawRay(origin, dir * rayDistance, Color.red, 0.2f);
+        /*
         if (playerHealth == null) return;
 
         // 아직 공격 거리 안에 있는지 확인 (플레이어가 뒤로 빠져서 회피 가능하므로)
@@ -139,7 +220,7 @@ public class ZombieAI : MonoBehaviour
         playerHealth.TakeDamage(attackDamage);
         Debug.Log("Zombie hit player!");
 
-        PlayBite();
+        PlayBite();*/
 
     }
 
