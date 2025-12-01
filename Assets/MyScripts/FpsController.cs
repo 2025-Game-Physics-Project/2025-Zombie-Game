@@ -39,6 +39,7 @@ public class FpsController : MonoBehaviour
     private bool isJumpDelay = false;
     private bool canShoot = true;
     public CameraRunBob camBob;
+    private PlayerHealth health;
 
     Vector3 inputDir;
 
@@ -47,6 +48,7 @@ public class FpsController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         rightArmBaseRot = rightArm.transform.localRotation;
+        health = GetComponent<PlayerHealth>();
     }
 
     IEnumerator JumpDelay()
@@ -55,6 +57,12 @@ public class FpsController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         isJumpDelay = false;
         Console.WriteLine("점프 딜레이 끝남");
+    }
+
+    IEnumerator RunDown()
+    {
+        yield return new WaitForSeconds(0.3f);
+        isRun = false;
     }
 
     void Update()
@@ -78,7 +86,10 @@ public class FpsController : MonoBehaviour
         {
             isRun = !isRun;
         }
-
+        if (Input.GetButtonDown("Fire1") && isRun)
+        {
+            StartCoroutine(RunDown());
+        }
         if (Input.GetKeyUp(KeyCode.W))
         {
             isRun = false;
@@ -153,12 +164,16 @@ public class FpsController : MonoBehaviour
 
         if (worldInput.magnitude > 0)
             targetVel = worldInput * runSpeed;
-
+        if (health.currentHealth < 1.5f)
+        {
+            targetVel *= 0.8f;
+        }
         Vector3 currentVel = bodyRb.linearVelocity;
         Vector3 horizontalVel = new Vector3(currentVel.x, 0, currentVel.z);
 
         // 부드럽게 가감속
         horizontalVel = Vector3.MoveTowards(horizontalVel, targetVel, runAcceleration * Time.fixedDeltaTime);
+
 
         float gravity = Physics.gravity.y;
         if (!isGrounded)

@@ -6,8 +6,23 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/MainMenu.unity
+    guid: 5f1419fad75a008458be9093ffb013f5
+  - enabled: 1
+    path: Assets/Scenes/Feature_GameMap2.unity
+    guid: 13abfee0be888e747821454d389eb636
+  - enabled: 1
+    path: Assets/Scenes/Feature_GameMap3.unity
+    guid: 54ddcd1df01ed0140a670f2237a0531d
+  - enabled: 1
+    path: Assets/Scenes/Feature_GameMap4.unity
+    guid: 01210e5b4f16ebf449eead8c2111bc23
+  - enabled: 1
+    path: Assets/Scenes/Escape_EndingScene.unity
+    guid: 832770c343c30a441988742720dbd44a
+  - enabled: 1
+    path: Assets/Scenes/Bad_EndingScene.unity
+    guid: fa77d404c8c25474abaaf62aab1819fa
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 57b0a4d83336a4ba4b1a3da3e7ce7a5f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
