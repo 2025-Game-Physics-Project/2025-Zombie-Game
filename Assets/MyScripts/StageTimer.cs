@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageTimer : MonoBehaviour
 {
@@ -23,7 +24,10 @@ public class StageTimer : MonoBehaviour
     private void OnGUI() //화면 표시
     {
         float remaining = timeLimit - ElapsedTime;
-        if (remaining < 0) remaining = 0;
+        if (remaining < 0) {
+            remaining = 0;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
 
         int minutes = Mathf.FloorToInt(remaining / 60f);
         int seconds = Mathf.FloorToInt(remaining % 60f);

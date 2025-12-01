@@ -389,8 +389,8 @@ MonoBehaviour:
   reloadBulletCount: 30
   currentBulletCount: 30
   maxBulletCount: 999
-  carryBulletCount: 144
-  retroActionForce: 0.4
+  carryBulletCount: 999
+  retroActionForce: 0.3
   muzzleFlash: {fileID: 9090132297156461641}
   fire_Sound: {fileID: 8300000, guid: 0b5211610be1612479e6db0f967b9a5e, type: 3}
   reload_Sound: {fileID: 8300000, guid: 03f5f592de4924968906c19a2df23ac1, type: 3}

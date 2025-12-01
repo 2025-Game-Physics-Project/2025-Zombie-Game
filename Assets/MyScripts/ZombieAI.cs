@@ -8,20 +8,24 @@ public class ZombieAI : MonoBehaviour
     public float detectionRange = 10f; //이 거리 안에 들어가면 추격 시작
     public float attackRange = 2f; //이 거리 안에 들어가면 공격
 
-    public float moveSpeed = 2f;        // 걷는 속도
-    public float rotationSpeed = 5f;    // 플레이어 방향으로 도는 속도
+    public float moveSpeed = 5f;        // 걷는 속도
+    public float rotationSpeed = 8f;    // 플레이어 방향으로 도는 속도
 
     private Animator animator;
 
     public int attackDamage = 1; //공격용 데미지. 플레이어 체력은 3. 공격 데미지 1.
     private PlayerHealth playerHealth; //플레이어 체력 변수.
     private ZombieHealth zombieHealth; //좀비 체력 변수. hp 0일시 로직 중단 위함.
+    private AudioClip audioClip;
+
+
 
     private void Awake() //물체 생성되는 Awake때 애니메이터 할당
     {
         animator = GetComponent<Animator>();
         playerHealth = player.GetComponent<PlayerHealth>(); //플레이어 체력 가져오기. 다른 씬에서도 활용할 경우 null 체크 추가.
         zombieHealth = GetComponent<ZombieHealth>(); //좀비 체력 가져오기. hp 0일시 로직 중단 위함.
+        
     }
 
     void Start()
@@ -134,5 +138,15 @@ public class ZombieAI : MonoBehaviour
 
         playerHealth.TakeDamage(attackDamage);
         Debug.Log("Zombie hit player!");
+
+        PlayBite();
+
     }
+
+    public void PlayBite()
+    {
+        var audio = GetComponent<AudioSource>();
+        audio.Play();
+    }
+
 }
